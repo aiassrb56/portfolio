@@ -1,0 +1,5 @@
+# Ignore editor/runtime files
+.cursor/
+.cursor-server/
+wsl-path.txt
+*.log
