@@ -214,6 +214,69 @@
       fill: currentColor;
     }
 
+    /* Feedback */
+    .feedback {
+      animation: fadeInUp 0.7s ease-out 0.35s both;
+    }
+    .feedback h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--accent-soft);
+      margin: 0 0 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .feedback-form {
+      max-width: 420px;
+    }
+    .feedback-form label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .feedback-form input,
+    .feedback-form textarea {
+      width: 100%;
+      padding: 0.6rem 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .feedback-form input:focus,
+    .feedback-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+    }
+    .feedback-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .feedback-form button {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--bg-dark);
+      background: var(--accent);
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .feedback-form button:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(20, 184, 166, 0.35);
+    }
+    .feedback-form button:active {
+      transform: translateY(0);
+    }
+
     @media (max-width: 480px) {
       .container { padding: 1.25rem 1rem; }
       section { padding: 3rem 0; }
@@ -281,6 +344,19 @@
       </div>
     </section>
 
+    <section class="feedback">
+      <h2>Обратная связь</h2>
+      <form class="feedback-form" id="feedback-form" action="#" method="get" aria-label="Форма обратной связи">
+        <label for="fb-name">Имя</label>
+        <input type="text" id="fb-name" name="name" placeholder="Ваше имя" autocomplete="name">
+        <label for="fb-email">Email</label>
+        <input type="email" id="fb-email" name="email" placeholder="your@email.com" required autocomplete="email">
+        <label for="fb-message">Сообщение</label>
+        <textarea id="fb-message" name="message" placeholder="Напишите сообщение..." required></textarea>
+        <button type="submit">Отправить</button>
+      </form>
+    </section>
+
     <section class="contacts">
       <h2>Контакты</h2>
       <ul class="contacts-list">
@@ -311,5 +387,21 @@
       </ul>
     </section>
   </div>
+  <script>
+    (function () {
+      var form = document.getElementById('feedback-form');
+      var email = 'aiassrb56@gmail.com';
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = (document.getElementById('fb-name').value || '').trim();
+        var from = (document.getElementById('fb-email').value || '').trim();
+        var msg = (document.getElementById('fb-message').value || '').trim();
+        var subject = 'Обратная связь с сайта' + (name ? ': ' + name : '');
+        var body = (name ? 'Имя: ' + name + '\n\n' : '') + (from ? 'Email: ' + from + '\n\n' : '') + 'Сообщение:\n' + msg;
+        var url = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        window.location.href = url;
+      });
+    })();
+  </script>
 </body>
 </html>
